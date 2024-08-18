@@ -13,7 +13,7 @@ using static BuildingManager;
 namespace Oxide.Plugins
 {
     [Info("Offline Raiding Weakened", "VisEntities", "1.0.0")]
-    [Description(" ")]
+    [Description("Lowers the damage inflicted on buildings when owners are offline.")]
     public class OfflineRaidingWeakened : RustPlugin
     {
         #region Fields
