@@ -12,7 +12,7 @@ using static BuildingManager;
 
 namespace Oxide.Plugins
 {
-    [Info("Offline Raiding Weakened", "VisEntities", "1.0.0")]
+    [Info("Offline Raiding Weakened", "VisEntities", "1.0.1")]
     [Description("Lowers the damage inflicted on buildings when owners are offline.")]
     public class OfflineRaidingWeakened : RustPlugin
     {
@@ -122,7 +122,7 @@ namespace Oxide.Plugins
             if (building == null)
                 return;
 
-            List<ulong> authedPlayers = Pool.GetList<ulong>();
+            List<ulong> authedPlayers = Pool.Get<List<ulong>>();
             foreach (var privilege in building.buildingPrivileges)
             {
                 foreach (var authedPlayer in privilege.authorizedPlayers)
@@ -155,7 +155,7 @@ namespace Oxide.Plugins
                     break;
             }
 
-            Pool.FreeList(ref authedPlayers);
+            Pool.FreeUnmanaged(ref authedPlayers);
 
             if (allOffline)
             {
@@ -184,7 +184,7 @@ namespace Oxide.Plugins
 
                 return false;
             }
-            
+
             public static RelationshipManager.PlayerTeam GetTeam(ulong playerId)
             {
                 if (RelationshipManager.ServerInstance == null)
@@ -203,7 +203,7 @@ namespace Oxide.Plugins
 
                 return false;
             }
-            
+
             public static bool Offline(ulong playerId)
             {
                 BasePlayer player = FindById(playerId);
